@@ -1,6 +1,7 @@
 const express = require('express');
 const dbConnection = require('./config/db');
-const { authRouter } = require('./routes/userRoutes');
+const { authRouter } = require('./routes/authRoutes');
+const cookieParser = require('cookie-parser');
 const app = express();
 require('dotenv').config();
 
@@ -9,8 +10,11 @@ dbConnection();
 
 app.use(express.json());
 
+// cookie-parser
+app.use(cookieParser());
+
 // routes
-app.use('auth', authRouter);
+app.use('/auth', authRouter);
 
 app.get('/', (req, res)=>{
     res.send('Admin Panel Dashboard');
