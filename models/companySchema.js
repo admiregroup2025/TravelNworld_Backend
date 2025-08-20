@@ -2,13 +2,16 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     name: {
-        type: String
+        type: String,
+        required: true
     },
     ownerName: {
-        type: String
+        type: String,
+        required: true
     },
     address: {
-        type: String
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -18,6 +21,7 @@ const userSchema = new mongoose.Schema({
     },
     mobile: {
         type: Number,
+        required: true,
         required: true
     },
     category: {
