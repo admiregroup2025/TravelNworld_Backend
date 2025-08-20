@@ -4,11 +4,18 @@ const { authRouter } = require('./routes/authRoutes');
 const cookieParser = require('cookie-parser');
 const { adminUserRouter } = require('./routes/adminUserRoutes');
 const { companyRouter } = require('./routes/companyRoutes');
+const cors = require('cors');
 const app = express();
 require('dotenv').config();
 
 // DB Connection
 dbConnection();
+
+// cors
+app.use(cors({
+    origin: true, // allow all origins dynamically
+    credentials: true // allow cookies, auth headers
+}));
 
 app.use(express.json());
 
