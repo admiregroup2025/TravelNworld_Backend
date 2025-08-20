@@ -1,11 +1,11 @@
 const bcrypt = require('bcrypt');
-const User = require('../models/userSchema');
+const User = require('../models/authSchema');
 const jwt = require('jsonwebtoken');
 
 // register User
 const register = async (req, res)=>{
     try {
-        const { name, email, password, role } = req.body;
+        const { name, email, password } = req.body;
 
         if(!name || !email || !password){
             return res.status(400).json({ message: 'Please fill all the required fields' });
@@ -17,6 +17,9 @@ const register = async (req, res)=>{
         }
 
         const hashPassword = await bcrypt.hash(password, 10 );
+
+        const userCount = await User.countDocuments();
+        const role = userCount === 0 ? 'Admin' : 'User';
 
         const user = await User.create({
             name,
